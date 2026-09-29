@@ -49,7 +49,7 @@ canvas{display:block;width:100%}
 var HOSTS=[{r:'https://api.binance.com',w:'wss://stream.binance.com:9443'},
            {r:'https://data-api.binance.vision',w:'wss://data-stream.binance.vision'}];
 var hostI=0,sym='BTCUSDT',C=60,N=180,start=0,live=true,lastI=-1,gen=0,ws=null,hover=-1;
-var SYMS=['BTCUSDT','ETHUSDT','SOLUSDT','BNBUSDT','XRPUSDT','DOGEUSDT','ADAUSDT','AVAXUSDT','LINKUSDT','TRXUSDT','DOTUSDT','LTCUSDT','BCHUSDT','NEARUSDT','UNIUSDT','ATOMUSDT','ETCUSDT','XLMUSDT','FILUSDT','APTUSDT','ARBUSDT','OPUSDT','INJUSDT','SUIUSDT','AAVEUSDT','SHIBUSDT','PEPEUSDT','TONUSDT','HBARUSDT','ICPUSDT'],P={},hoverSym='BTCUSDT',rc=0;
+var SYMS=['BTCUSDT','ETHUSDT','SOLUSDT','BNBUSDT','XRPUSDT','DOGEUSDT','ADAUSDT','AVAXUSDT','LINKUSDT','TRXUSDT','DOTUSDT','LTCUSDT','BCHUSDT','NEARUSDT','UNIUSDT','ATOMUSDT','ETCUSDT','XLMUSDT','FILUSDT','APTUSDT','ARBUSDT','OPUSDT','INJUSDT','SUIUSDT','AAVEUSDT','SHIBUSDT','PEPEUSDT','TONUSDT','HBARUSDT','ICPUSDT','POLUSDT','ALGOUSDT','VETUSDT','SANDUSDT','MANAUSDT','AXSUSDT','GRTUSDT','EGLDUSDT','THETAUSDT','XTZUSDT','IMXUSDT','RENDERUSDT','STXUSDT','MKRUSDT','LDOUSDT','CRVUSDT','SNXUSDT','WLDUSDT','SEIUSDT','TIAUSDT','JUPUSDT','ENAUSDT','FETUSDT','TAOUSDT','ORDIUSDT','WIFUSDT','BONKUSDT','FLOKIUSDT','TRUMPUSDT','ONDOUSDT'],P={},hoverSym='BTCUSDT',rc=0;
 SYMS.forEach(function(s0){P[s0]={price:new Float64Array(N).fill(NaN),lastI:-1,rows:[],gbase:1}});
 var price=P[sym].price,cum=[],rows=[];
 var PCOL={BTCUSDT:'#FF9F1C',ETHUSDT:'#7C8CFF',SOLUSDT:'#C77DFF',BNBUSDT:'#00E5FF',XRPUSDT:'#F1F5F9',DOGEUSDT:'#FF7AC6',ADAUSDT:'#E6C8A0',AVAXUSDT:'#4DA3FF',LINKUSDT:'#FF8A65',TRXUSDT:'#90A4AE'};
@@ -96,7 +96,7 @@ async function load(){
     setStatus('Loading '+SYMS.length+' pairs…');
     try{
       await Promise.all(SYMS.map(async function(s0){
-        await new Promise(function(z){setTimeout(z,SYMS.indexOf(s0)*120)});
+        await new Promise(function(z){setTimeout(z,SYMS.indexOf(s0)*100)});
                 if(g!==gen)return;
                 var st=start*1000,endMs=endSec*1000+999;
         while(st<endMs){
@@ -306,8 +306,8 @@ function draw(){
             }
             tags.sort(function(a,b){return a.y-b.y});
             var tyy=-1e9;
-            tags.forEach(function(g1){var y2=Math.max(g1.y,tyy+12);g1.ly=y2;tyy=y2});
-            cx.font='700 11px "Trebuchet MS",sans-serif';cx.textAlign='left';cx.textBaseline='middle';
+            tags.forEach(function(g1){var y2=Math.max(g1.y,tyy+9);g1.ly=y2;tyy=y2});
+            cx.font='700 9px "Trebuchet MS",sans-serif';cx.textAlign='left';cx.textBaseline='middle';
             tags.forEach(function(g1){
               cx.globalAlpha=.5;cx.strokeStyle=g1.c;cx.lineWidth=1;cx.beginPath();cx.moveTo(g1.x,g1.y);cx.lineTo(xOf(nowS)+4,g1.ly);cx.stroke();
               cx.globalAlpha=1;cx.fillStyle=g1.c;cx.fillText(g1.t,xOf(nowS)+8,g1.ly);
