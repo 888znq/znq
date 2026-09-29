@@ -55,7 +55,7 @@ var price=P[sym].price,cum=[],rows=[];
 var PCOL={BTCUSDT:'#FF9F1C',ETHUSDT:'#7C8CFF',SOLUSDT:'#C77DFF',BNBUSDT:'#00E5FF',XRPUSDT:'#F1F5F9',DOGEUSDT:'#FF7AC6',ADAUSDT:'#E6C8A0',AVAXUSDT:'#4DA3FF',LINKUSDT:'#FF8A65',TRXUSDT:'#90A4AE'};
 SYMS.forEach(function(s0,i0){if(!PCOL[s0])PCOL[s0]='hsl('+((i0*47)%360)+',85%,65%)'});
 function use(s0){var p0=P[s0];price=p0.price;lastI=p0.lastI;rows=p0.rows;gbase=p0.gbase}
-var mode='pct',labMin=3,ymn=0,ymx=1,gbase=1;
+var SHOWLINES=false,mode='pct',labMin=3,ymn=0,ymx=1,gbase=1;
 var cv=document.getElementById('c'),cx=cv.getContext('2d');
 var W=0,H=620,L=12,R=120,T=10,FOOT=58;
 
@@ -207,7 +207,7 @@ function draw(){
     cx.globalAlpha=isH?1:dim?.12:.6;cx.lineWidth=isH?2.6:1.2;
     if(!p.length){cx.globalAlpha=1;return}
     var last=Math.min(lastI,N-1),lastStop=p[p.length-1][1],tail=price[last]>lastStop?up:price[last]<lastStop?dn:mute,cur=null;
-    for(var s2=r+1;s2<=last&&s2<=r+2*C;s2++){
+    for(var s2=r+1;s2<=last&&s2<=r+2*C&&SHOWLINES;s2++){
       var a=price[s2-1],b=price[s2];
       if(a!==a||b!==b){if(cur){cx.stroke();cur=null}continue}
       var k=Math.ceil((s2-r)/C),col=PCOL[cs];
